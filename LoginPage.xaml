@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HavenlyBookingApp.LoginPage"
+             Title="LoginPage"
+             BackgroundColor="Black">
+
+	<Grid>
+		<!-- Background Image -->
+		<Image Source="background.png"
+               Aspect="AspectFill"/>
+
+		<!-- Dark Overlay -->
+		<BoxView BackgroundColor="#80000000"/>
+
+		<!-- Login Content -->
+		<VerticalStackLayout Spacing="25"
+                             VerticalOptions="Center"
+                             Padding="30">
+
+			<!-- Title -->
+			<Label Text="Welcome Back"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"/>
+
+			<Label Text="Please login to book your stay"
+                   FontSize="16"
+                   TextColor="#B0B0B0"
+                   HorizontalOptions="Center"/>
+
+			<!-- Login Form Card -->
+			<Frame BackgroundColor="#1C1C1C"
+                   CornerRadius="15"
+                   HasShadow="True"
+                   Padding="20">
+
+				<VerticalStackLayout Spacing="15">
+
+					<!-- Email -->
+					<Entry Placeholder="Email"
+                           Keyboard="Email"
+                           TextColor="White"
+                           PlaceholderColor="#A0A0A0"
+                           BackgroundColor="#2A2A2A"
+                           HeightRequest="50"/>
+
+					<!-- Password -->
+					<Entry Placeholder="Password"
+                           IsPassword="True"
+                           TextColor="White"
+                           PlaceholderColor="#A0A0A0"
+                           BackgroundColor="#2A2A2A"
+                           HeightRequest="50"/>
+
+					<!-- Login Button -->
+					<Button Text="Login"
+                            BackgroundColor="#D4AF37"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="8"
+                            HeightRequest="50"/>
+
+					<!-- Links -->
+					<HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+						<Label Text="Forgot password?"
+                               TextColor="#B0B0B0"
+                               FontSize="12"/>
+						<Label Text="Sign Up"
+                               TextColor="#D4AF37"
+                               FontSize="12"
+                               FontAttributes="Bold"/>
+					</HorizontalStackLayout>
+
+				</VerticalStackLayout>
+			</Frame>
+		</VerticalStackLayout>
+	</Grid>
+</ContentPage>
