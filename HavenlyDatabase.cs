@@ -8,7 +8,7 @@ using HavenlyBookingApp.Models;
 
 namespace HavenlyBookingApp
 {
-    public class HavenlyDB
+    public class HavenlyDatabase
     {
         SQLiteAsyncConnection database;
 
