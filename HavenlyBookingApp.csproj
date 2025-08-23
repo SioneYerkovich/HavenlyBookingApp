@@ -68,19 +68,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\PolicyView.xaml.cs">
-	    <DependentUpon>PolicyView.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="Views\PolicyView.xaml">
+	  <MauiXaml Update="Views\SignupView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Models\ViewModels\" />
 	</ItemGroup>
 
 </Project>

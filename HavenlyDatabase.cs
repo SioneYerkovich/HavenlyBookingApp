@@ -14,7 +14,7 @@ namespace HavenlyBookingApp
 
         public async Task Init()
         {
-            if (database is not null)
+            if (database != null)
                 return;
 
             database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
@@ -31,10 +31,17 @@ namespace HavenlyBookingApp
         }
 
         //Method to validate and retrieve a user from the database (primarily for logging in)
-        public async Task<UserModel> GetUserAsync(string email, string password)
+        public async Task<UserModel> GetUserLoginAsync(string email, string password)
         {
             await Init();
             return await database.Table<UserModel>().Where(user => user.email == email && user.password == password).FirstOrDefaultAsync();
+        }
+
+        //Method to retrieve a user from the database (primarily for validation)
+        public async Task<UserModel> GetUserAsync(string email)
+        {
+            await Init();
+            return await database.Table<UserModel>().Where(user => user.email == email).FirstOrDefaultAsync();
         }
 
         //Method to save a user in the database, must pass a UserModel object to function correctly

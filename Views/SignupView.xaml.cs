@@ -1,15 +1,16 @@
-using CommunityToolkit.Maui;
-using CommunityToolkit.Maui.Extensions;
-using Microsoft.Maui.Controls.Shapes;
-using System.Threading.Tasks;
-using HavenlyBookingApp.Views;
-
 namespace HavenlyBookingApp.Views;
-public partial class PolicyView : ContentPage
+using CommunityToolkit.Maui;
+
+using CommunityToolkit.Maui.Extensions;
+using HavenlyBookingApp.Models.ViewModels;
+
+public partial class SignupView : ContentPage
 {
-    public PolicyView()
-    {
-        InitializeComponent();
+	public SignupView()
+	{
+		InitializeComponent();
+        var database = MauiProgram.Services.GetService<HavenlyDatabase>();
+        BindingContext = new SignupViewModel(database);
         Clouds.IsAnimationEnabled = false;
     }
 
@@ -21,11 +22,6 @@ public partial class PolicyView : ContentPage
         await Task.Delay(15000);
         Clouds.IsVisible = true;
         Clouds.IsAnimationEnabled = true;
-    }
-
-    private void Agree_Clicked(object sender, EventArgs e)
-    {
-        Application.Current.Windows[0].Page = new AppShell();
     }
 
     private async void PrivacyPolicyTapped(object? sender, TappedEventArgs e)
