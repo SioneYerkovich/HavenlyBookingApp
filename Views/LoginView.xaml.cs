@@ -1,17 +1,20 @@
 using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Extensions;
 using HavenlyBookingApp.Models.ViewModels;
+using HavenlyBookingApp.Sessions;
 
 namespace HavenlyBookingApp.Views;
 
-public partial class SignupView : ContentPage
+public partial class LoginView : ContentPage
 {
-	public SignupView()
+	public LoginView()
 	{
 		InitializeComponent();
         var database = MauiProgram.Services.GetService<HavenlyDatabase>();
-        BindingContext = new SignupViewModel(database);
+        var session = MauiProgram.Services.GetService<UserSession>();
+        BindingContext = new LoginViewModel(database, session);
         Clouds.IsAnimationEnabled = false;
+        Clouds1.IsAnimationEnabled = false;
     }
 
     protected override async void OnAppearing()
@@ -19,14 +22,17 @@ public partial class SignupView : ContentPage
         base.OnAppearing();
 
         // Wait 15 seconds before showing and playing the animation
-        await Task.Delay(15000);
+        await Task.Delay(12000);
         Clouds.IsVisible = true;
         Clouds.IsAnimationEnabled = true;
+        await Task.Delay(12000);
+        Clouds1.IsVisible = true;
+        Clouds1.IsAnimationEnabled = true;
     }
 
-    private void LoginTapped(object? sender, TappedEventArgs e)
+    private void SignupTapped(object? sender, TappedEventArgs e)
     {
-        Application.Current.Windows[0].Page = new LoginView();
+        Application.Current.Windows[0].Page = new SignupView();
     }
 
     private async void PrivacyPolicyTapped(object? sender, TappedEventArgs e)

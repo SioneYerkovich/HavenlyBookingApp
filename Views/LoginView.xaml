@@ -4,80 +4,65 @@
              xmlns:models="clr-namespace:HavenlyBookingApp.Models"
              xmlns:vm="clr-namespace:HavenlyBookingApp.Models.ViewModels"
              xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
-             x:Class="HavenlyBookingApp.Views.SignupView"
-             x:DataType="vm:SignupViewModel"
+             x:Class="HavenlyBookingApp.Views.LoginView"
+             x:DataType="vm:LoginViewModel"
              BackgroundColor="#EDE7F6">
 
     <VerticalStackLayout>
-
-        <!-- SECTION 1: CREATE TASKS -->
-        <Image 
-            Source="havenly_transparent.PNG" 
-            Margin="0,50,0,0" />
-        
         <skia:SKLottieView
-            x:Name="Clouds"
-            Source="CloudsPassing.json"
-            RepeatCount="-1"
-            RepeatMode="Reverse"
-            HeightRequest="70"
-            WidthRequest="410"
-            Margin="0,20,0,0"/>
+                x:Name="Clouds"
+                Source="CloudsPassing.json"
+                RepeatCount="-1"
+                RepeatMode="Reverse"
+                HeightRequest="70"
+                WidthRequest="410"
+                Margin="0,0,0,0"/>
+        <!-- SECTION 1: CREATE TASKS -->
+        <Grid>
+            <skia:SKLottieView
+                x:Name="Clouds1"
+                Source="CloudsPassing.json"
+                RepeatCount="-1"
+                RepeatMode="Reverse"
+                HeightRequest="70"
+                WidthRequest="410"
+                Margin="0,70,0,0"/>
 
-        <Label 
-            Text="Register an account"
-            Margin="0,10,0,20"  
-            FontAttributes="Bold" 
-            FontSize="25"
-            HorizontalOptions="Center" />
+            <Image 
+                Source="havenly_transparent.PNG" 
+                Margin="0,160,0,20" />
+        </Grid>
 
         <VerticalStackLayout Padding="40,0">
 
-            <Grid 
-                ColumnDefinitions="*,*"
-                ColumnSpacing="0">
-
+            <Grid>
+                <Image Source="user.png" HorizontalOptions="Start"/>
                 <Entry 
-                    Text="{Binding NewFirstName}"
-                    Grid.Column="0"
-                    Placeholder="First Name"
-                    Margin="15" />
-
-                <Entry 
-                    Text="{Binding NewLastName}"
-                    Grid.Column="1"
-                    Placeholder="Last Name"
-                    Margin="15" />
-
+                    Text="{Binding email}" 
+                    Placeholder="Enter your email address" 
+                    Margin="15"
+                    WidthRequest="290"/>
             </Grid>
 
-            <Entry 
-                Text="{Binding NewEmail}" 
-                Placeholder="Email Address" 
-                Margin="15" />
-
-            <Entry 
-                Text="{Binding NewPassword}"
-                Placeholder="Password"
-                IsPassword="True"
-                Margin="15" />
-
-            <Entry 
-                Text="{Binding ConfirmPassword}"
-                Placeholder="Confirm Password"
-                IsPassword="True"
-                Margin="15" />
+            <Grid>
+                <Image Source="lock.png" HorizontalOptions="Start"/>
+                <Entry
+                    Text="{Binding password}"
+                    Placeholder="Enter your password"
+                    IsPassword="True"
+                    Margin="15"
+                    WidthRequest="290"/>
+            </Grid>
 
             <Button 
-                Text="Create account" 
-                TextColor="White"
-                ImageSource="flag.png" 
+                Text="Log in" 
+                TextColor="White" 
                 FontAttributes="Bold" 
                 WidthRequest="160"
                 ContentLayout="Left,2"
                 Background="Black"
                 Margin="0,20"
-                Command="{Binding CreateNewUserCommand}" />
+                Command="{Binding LoginUserCommand}"/>
 
             <HorizontalStackLayout HorizontalOptions="Center">
                 <Label
@@ -98,19 +83,19 @@
             </HorizontalStackLayout>
             <HorizontalStackLayout HorizontalOptions="Center">
                 <Label
-                    Text="Already have an account?"
+                    Text="Don't have an account?"
                     Margin="40,0,0,0"
                     FontSize="10"
                     FontAttributes="Italic"/>
                 <Label
-                    Text=" Log in here"
+                    Text=" Register here"
                     TextColor="#3700B3"
                     Margin="0,0,40,0"
                     FontSize="10"
                     FontAttributes="Italic">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer 
-                            Tapped="LoginTapped"/>
+                            Tapped="SignupTapped"/>
                     </Label.GestureRecognizers>
                 </Label>
             </HorizontalStackLayout>
@@ -121,7 +106,7 @@
             RepeatMode="Reverse"
             HeightRequest="70"
             WidthRequest="410"
-            Margin="0,20,0,0"/>
+            Margin="0,150,0,0"/>
 
         </VerticalStackLayout>
     </VerticalStackLayout>

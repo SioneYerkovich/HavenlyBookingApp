@@ -3,6 +3,8 @@ using SkiaSharp.Views.Maui.Controls.Hosting;
 using CommunityToolkit.Maui;
 using HavenlyBookingApp.Models.ViewModels;
 using HavenlyBookingApp.Views;
+using HavenlyBookingApp.Models;
+using HavenlyBookingApp.Sessions;
 
 namespace HavenlyBookingApp
 {
@@ -27,6 +29,7 @@ namespace HavenlyBookingApp
 #endif
             //By default, appshell does not pass arguments using DI. You have to manually pass the argument instances yourself
             builder.Services.AddSingleton<HavenlyDatabase>();
+            builder.Services.AddSingleton<UserSession>();
             var app = builder.Build();
             Services = app.Services;
             return app;

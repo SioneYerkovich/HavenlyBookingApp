@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using HavenlyBookingApp.Views;
 
 namespace HavenlyBookingApp.Models.ViewModels
 {
@@ -123,11 +124,12 @@ namespace HavenlyBookingApp.Models.ViewModels
                     fName = NewFirstName,
                     lName = NewLastName,
                     email = formattedEmail,
-                    password = NewPassword
+                    password = NewPassword,
+                    accountType = "Client"
                 });
 
                 await Toast.Make("Account created successfully!").Show();
-                //Application.Current.Windows[0].Page = new LoginView();
+                Application.Current.Windows[0].Page = new LoginView();
             }
         }
 

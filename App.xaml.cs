@@ -11,7 +11,7 @@ namespace HavenlyBookingApp
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new SignupView());
+            return new Window(new LoginView());
         }
     }
 }
