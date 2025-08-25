@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:HavenlyBookingApp.Models"
+             xmlns:vm="clr-namespace:HavenlyBookingApp.Models.ViewModels"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             x:Class="HavenlyBookingApp.Views.SignupView"
+             x:DataType="vm:SignupViewModel"
+             BackgroundColor="#EDE7F6">
+
+    <VerticalStackLayout>
+
+        <!-- SECTION 1: CREATE TASKS -->
+        <Image 
+            Source="havenly_transparent.PNG" 
+            Margin="0,50,0,0" />
+        
+        <skia:SKLottieView
+            x:Name="Clouds"
+            Source="CloudsPassing.json"
+            RepeatCount="-1"
+            RepeatMode="Reverse"
+            HeightRequest="70"
+            WidthRequest="410"
+            Margin="0,20,0,0"/>
+
+        <Label 
+            Text="Register an account"
+            Margin="0,10,0,20"  
+            FontAttributes="Bold" 
+            FontSize="25"
+            HorizontalOptions="Center" />
+
+        <VerticalStackLayout Padding="40,0">
+
+            <Grid 
+                ColumnDefinitions="*,*"
+                ColumnSpacing="0">
+
+                <Entry 
+                    Text="{Binding NewFirstName}"
+                    Grid.Column="0"
+                    Placeholder="First Name"
+                    Margin="15" />
+
+                <Entry 
+                    Text="{Binding NewLastName}"
+                    Grid.Column="1"
+                    Placeholder="Last Name"
+                    Margin="15" />
+
+            </Grid>
+
+            <Entry 
+                Text="{Binding NewEmail}" 
+                Placeholder="Email Address" 
+                Margin="15" />
+
+            <Entry 
+                Text="{Binding NewPassword}"
+                Placeholder="Password"
+                IsPassword="True"
+                Margin="15" />
+
+            <Entry 
+                Text="{Binding ConfirmPassword}"
+                Placeholder="Confirm Password"
+                IsPassword="True"
+                Margin="15" />
+
+            <Button 
+                Text="Create account" 
+                TextColor="White"
+                ImageSource="flag.png" 
+                FontAttributes="Bold" 
+                WidthRequest="160"
+                ContentLayout="Left,2"
+                Background="Black"
+                Margin="0,20"
+                Command="{Binding CreateNewUserCommand}" />
+
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Label
+                    Text="By continuing, you agree to our"
+                    Margin="40,0,0,0"
+                    FontSize="10"
+                    FontAttributes="Italic"/>
+                <Label
+                    Text="Privacy Policy*"
+                    TextColor="#3700B3"
+                    Margin="0,0,40,10"
+                    FontSize="10"
+                    FontAttributes="Italic">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="PrivacyPolicyTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Label
+                    Text="Already have an account?"
+                    Margin="40,0,0,0"
+                    FontSize="10"
+                    FontAttributes="Italic"/>
+                <Label
+                    Text=" Log in here"
+                    TextColor="#3700B3"
+                    Margin="0,0,40,0"
+                    FontSize="10"
+                    FontAttributes="Italic">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Tapped="LoginTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+
+            <skia:SKLottieView
+            Source="CloudsPassing.json"
+            RepeatCount="-1"
+            RepeatMode="Reverse"
+            HeightRequest="70"
+            WidthRequest="410"
+            Margin="0,20,0,0"/>
+
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
