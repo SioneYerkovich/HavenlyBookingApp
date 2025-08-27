@@ -18,9 +18,9 @@ namespace HavenlyBookingApp
                 return;
 
             database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-            var usersTable = await database.CreateTableAsync<UserModel>();
-            var roomsTable = await database.CreateTableAsync<RoomModel>();
-            var bookingsTable = await database.CreateTableAsync<BookingModel>();
+            var usersTable = await database.CreateTableAsync<UserModel>(); //Creates the user table in DB
+            var roomsTable = await database.CreateTableAsync<RoomModel>(); //Creates the rooms table in DB
+            var bookingsTable = await database.CreateTableAsync<BookingModel>(); //Creates the bookings table in DB
         }
 
         //Method to retrieve all users from the database

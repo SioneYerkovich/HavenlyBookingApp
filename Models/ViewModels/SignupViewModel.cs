@@ -15,6 +15,7 @@ namespace HavenlyBookingApp.Models.ViewModels
 {
     public class SignupViewModel : INotifyPropertyChanged
     {
+        //Constructor - Called automatically when the viewmodel is accessed. Retrieves the database instance
         public SignupViewModel(HavenlyDatabase database)
         {
             CreateNewUserCommand = new Command(async () => await CreateNewUserAsync());
@@ -38,7 +39,7 @@ namespace HavenlyBookingApp.Models.ViewModels
         public void OnPropertyChanged([CallerMemberName] string name = "") =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
-        //Creating variables that is globally accessible and will be the point of reference for bindings
+        //Creating variables that are globally accessible and will be the point of reference for bindings
         public string NewFirstName
         {
             //get = read action, get the current value of _newCategoryName
@@ -109,30 +110,46 @@ namespace HavenlyBookingApp.Models.ViewModels
             }
         }
 
+        //This method formats the user input to a display friendly format
+        private string Capitalize(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+                return input;
+
+            input = input.Trim();
+            return char.ToUpper(input[0]) + input.Substring(1).ToLower();
+        }
+
+        //Method to create a new user in the database
         public async Task CreateNewUserAsync()
         {
-            if (!await SignupValidation())
+            if (!await SignupValidation()) //If the details provided fail validation
             {
                 return;
             }
-            else
+            else //Otherwise create a user
             {
+                //This formats all of the user details prior to data entry
+                var formattedFirstName = Capitalize(NewFirstName);
+                var formattedLastName = Capitalize(NewLastName);
                 var formattedEmail = NewEmail.ToLower();
 
+                //Create a new usermodel and store in the DB
                 await _database.SaveUserAsync(new UserModel
                 {
-                    fName = NewFirstName,
-                    lName = NewLastName,
+                    fName = formattedFirstName,
+                    lName = formattedLastName,
                     email = formattedEmail,
                     password = NewPassword,
-                    accountType = "Client"
+                    accountType = "User"
                 });
 
-                await Toast.Make("Account created successfully!").Show();
-                Application.Current.Windows[0].Page = new LoginView();
+                await Toast.Make("Account created successfully!").Show(); //Success confirmation
+                Application.Current.Windows[0].Page = new LoginView(); //Redirect to Login
             }
         }
 
+        //Method to validate this is a new account
         public async Task<bool> CheckUserExist(string NewEmail)
         {
             var matchingUser = await _database.GetUserAsync(NewEmail);
@@ -174,11 +191,12 @@ namespace HavenlyBookingApp.Models.ViewModels
             //Check email format
             if (string.IsNullOrWhiteSpace(NewEmail) || !Regex.IsMatch(NewEmail, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
-                await Toast.Make("Please enter a valid email address").Show();
+                await Toast.Make("Please enter a valid email format").Show();
                 return false;
             }
             
-            if (await CheckUserExist(NewEmail)) //Check if account exists
+            //Check if account exists
+            if (await CheckUserExist(NewEmail))
             {
                 return false;
             }

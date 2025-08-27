@@ -10,7 +10,6 @@
 
     <VerticalStackLayout>
 
-        <!-- SECTION 1: CREATE TASKS -->
         <Image 
             Source="havenly_transparent.PNG" 
             Margin="0,50,0,0" />

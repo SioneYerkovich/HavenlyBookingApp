@@ -30,6 +30,8 @@ namespace HavenlyBookingApp
             //By default, appshell does not pass arguments using DI. You have to manually pass the argument instances yourself
             builder.Services.AddSingleton<HavenlyDatabase>();
             builder.Services.AddSingleton<UserSession>();
+            builder.Services.AddTransient<ProfileView>();
+            builder.Services.AddTransient<ProfileViewModel>();
             var app = builder.Build();
             Services = app.Services;
             return app;

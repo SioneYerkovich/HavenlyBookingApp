@@ -16,11 +16,13 @@ namespace HavenlyBookingApp.Models.ViewModels
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
+        //Constructor - Called automatically when the relative view is accessed. Retrieves the database and session instance
         public LoginViewModel(HavenlyDatabase database, UserSession session)
         {
             LoginUserCommand = new Command(async () => await LoginUserAsync());
             _database = database;
             _session = session;
+            display();
         }
 
         //Declaring that there is a button or feature that will use this command
@@ -70,21 +72,23 @@ namespace HavenlyBookingApp.Models.ViewModels
             }
         }
 
+        //Method to log in a user
         public async Task LoginUserAsync()
         {
-            var success = await VerifyUserAsync(email, password);
-            if (success)
+            var success = await VerifyUserAsync(email, password); //verify the user exists
+            if (success) //if they exist
             {
-                var user = await _database.GetUserAsync(email);
-                _session.SetUser(user);
-                Application.Current.Windows[0].Page = new DashboardView();
+                var user = await _database.GetUserAsync(email); //retrieve the user from DB
+                _session.SetUser(user); //Assign the user as the current session
+                Application.Current.Windows[0].Page = new AppShell(_session); //Open the application
             }
         }
 
+        //Method to verify/validate the user details
         public async Task<bool> VerifyUserAsync(string email, string password)
         {
-            var matchingUser = await _database.GetUserLoginAsync(email, password);
-            if (matchingUser != null)
+            var matchingUser = await _database.GetUserLoginAsync(email, password); //retrieve the first match for the given details from DB
+            if (matchingUser != null) //if there's a match
             {
                 await Toast.Make("You have been logged in").Show();
                 return true;
@@ -92,6 +96,16 @@ namespace HavenlyBookingApp.Models.ViewModels
             await Toast.Make("Your email or password are incorrect").Show();
             return false;
         }
-    }
+
+        //This is a developer method that is utilized to see database information in the console when logging in
+        private async void display()
+        {
+            var allUsers = await _database.GetUsersAsync();
+            foreach (var user in allUsers)
+            {
+                Console.WriteLine($"Id: {user.userID}, Email: {user.email}, Name: {user.fName} {user.lName}");
+            }
+        }
+}
 
 }

@@ -3,7 +3,67 @@
     x:Class="HavenlyBookingApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:HavenlyBookingApp"
-    xmlns:views="clr-namespace:HavenlyBookingApp.Views">
+    xmlns:views="clr-namespace:HavenlyBookingApp.Views"
+    xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+    FlyoutBackgroundColor="#EDE7F6"
+    Shell.BackgroundColor="#EDE7F6">
 
+    <Shell.TitleView>
+        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+            <Image Source="havenly_transparent.png" Margin="190,0,0,0"/>
+        </Grid>
+    </Shell.TitleView>
+
+    <!--Flyout header-->
+    <Shell.FlyoutHeader>
+        <VerticalStackLayout 
+            Spacing="15" 
+            HorizontalOptions="Center" 
+            VerticalOptions="Center">
+            <Image
+                Source="havenly_transparent.png" Margin="0,20,0,20"/>
+        </VerticalStackLayout>
+    </Shell.FlyoutHeader>
+
+    <!--Flyout items-->
+
+    <FlyoutItem Title="Dashboard" Icon="dashboard.png">
+        <ShellContent
+            Title="Dashboard"
+            ContentTemplate="{DataTemplate views:DashboardView}"
+            Route="Dashboard"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Profile" Icon="user.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate views:ProfileView}"
+            Route="Profile"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Admin dashboard" Icon="admin2.png" x:Name="AdminItem">
+        <ShellContent
+            Title="Admin dashboard"
+            ContentTemplate="{DataTemplate views:AdminDashboardView}"
+            Route="Admin"/>
+    </FlyoutItem>
+
+    <Shell.FlyoutFooter>
+        <VerticalStackLayout>
+            <skia:SKLottieView
+                x:Name="Clouds"
+                Source="CloudsPassing.json"
+                RepeatCount="-1"
+                RepeatMode="Reverse"
+                HeightRequest="70"
+                WidthRequest="410"
+                Margin="0,0,0,300"/>
+            <skia:SKLottieView
+                Source="CloudsPassing.json"
+                RepeatCount="-1"
+                RepeatMode="Reverse"
+                HeightRequest="70"
+                WidthRequest="410"
+                Margin="0,0,0,30"/>
+        </VerticalStackLayout>
+    </Shell.FlyoutFooter>
 </Shell>

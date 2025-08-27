@@ -10,6 +10,7 @@ namespace HavenlyBookingApp.Sessions
 {
     public class UserSession
     {
+        //Declaring class attributes
         public bool IsLoggedIn { get; set; } = false;
         public UserModel CurrentUser { get; set; }
 

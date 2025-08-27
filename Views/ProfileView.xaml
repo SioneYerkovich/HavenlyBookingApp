@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HavenlyBookingApp.Models.ViewModels"
+             x:Class="HavenlyBookingApp.Views.ProfileView"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             x:DataType="vm:ProfileViewModel"
+             BackgroundColor="#EDE7F6">
+
+    <VerticalStackLayout>
+        <!-- User details section of the page -->
+        <skia:SKLottieView
+                Source="Profile.json"
+                RepeatCount="-1"
+                RepeatMode="Restart"
+                HeightRequest="200"
+                WidthRequest="200"
+                Margin="0,50,0,0"/>
+
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Label
+                Text="{Binding FirstName}"
+                FontSize="25"
+                FontAttributes="Bold"
+                Margin="0,0,3,0"
+                HorizontalOptions="Center"/>
+            <Label
+                Text="{Binding LastName}"
+                FontSize="25"
+                FontAttributes="Bold"
+                Margin="3,0,0,0"
+                HorizontalOptions="Center"/>
+        </HorizontalStackLayout>
+        
+        <Label
+            Text="{Binding Email}"
+            HorizontalOptions="Center"
+            Margin="0,5,0,0"/>
+        <Label 
+            Text="{Binding CurrentDate}"
+            TextColor="Black"
+            HorizontalOptions="Center"
+            Margin="0,5,0,0"/>
+        <!-- ^ User details ends here ^ -->
+        
+        <!-- This is the buttons section -->
+        <Grid RowDefinitions="auto,auto,auto,auto,auto"
+              RowSpacing="30"
+              WidthRequest="230"
+              Margin="0,30,0,0">
+            <Button 
+                Grid.Row="0"
+                Text="Update account details"
+                Background="Black"
+                ImageSource="update_details.png"
+                Clicked="UpdateDetails"/>
+            <Button 
+                Grid.Row="1"
+                Text="Update email address"
+                Background="Black"
+                ImageSource="update_email.png"
+                Clicked="UpdateEmail"/>
+            <Button 
+                Grid.Row="2"
+                Text="Change your password"
+                Background="Black"
+                ImageSource="change_password.png"
+                Clicked="UpdatePassword"/>
+            <Button 
+                Grid.Row="3"
+                Text="Deactivate your profile"
+                Background="Black"
+                ImageSource="deactivate.png"
+                Clicked="DeactivateAccount"/>
+            <Button 
+                Grid.Row="4"
+                Text="Log out"
+                Background="Black"
+                ImageSource="logout.png"
+                Clicked="Logout"/>
+        </Grid>
+        <!-- ^ Buttons section ends here ^ -->
+    </VerticalStackLayout>
+</ContentPage>
