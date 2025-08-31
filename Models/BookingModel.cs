@@ -10,10 +10,12 @@ namespace HavenlyBookingApp.Models
     public class BookingModel
     {
         [PrimaryKey, AutoIncrement]
-        public int bookingID { get; set; }
-        public int userID { get; set; }
-        public int roomID { get; set; }
-        public string startDate { get; set; }
-        public string endDate { get; set; }
+        public int BookingID { get; set; }
+        public int UserID { get; set; }
+        public int RoomID { get; set; }
+        public int RoomNumber { get; set; } //THIS IS FOR TESTING, WILL BE REMOVED ONCE BOOKING FEATURE IS COMPLETE
+        public string RoomType { get; set; } //THIS IS FOR TESTING, WILL BE REMOVED ONCE BOOKING FEATURE IS COMPLETE
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
     }
 }

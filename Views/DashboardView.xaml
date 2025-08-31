@@ -1,6 +1,119 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HavenlyBookingApp.Models.ViewModels"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             xmlns:models="clr-namespace:HavenlyBookingApp.Models"
              x:Class="HavenlyBookingApp.Views.DashboardView"
+             x:DataType="vm:DashboardViewModel"
              BackgroundColor="#EDE7F6">
+    <ScrollView>
+        <VerticalStackLayout
+            Margin="20,10,20,0">
+
+            <!-- Header section -->
+                <skia:SKLottieView
+                    Source="welcome.json"
+                    RepeatCount="0"
+                    HeightRequest="50"
+                    WidthRequest="200"
+                    Margin="0,20,0,0"
+                    HorizontalOptions="Center"/>
+                <Label
+                Text="Manage your hotel bookings easily with Havenly."
+                    HorizontalOptions="Center"
+                Margin="0,0,0,20"/>
+            <!-- ^ End of header section ^ -->
+
+            <!-- Bookings section -->
+            <Label 
+                Text="Your Bookings"
+                FontSize="25"
+                FontAttributes="Bold"
+                Margin="0,40,0,10"/>
+            <CollectionView
+                ItemsSource="{Binding BookingItems}">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout>
+                        <Label 
+                            Text="Looking for your next safe haven?"
+                            HorizontalOptions="Center"
+                            Margin="0,30,0,40"/>
+                        <skia:SKLottieView
+                            Source="CloudsPassing.json"
+                            RepeatCount="-1"
+                            RepeatMode="Restart"
+                            HeightRequest="170"
+                            WidthRequest="170"/>
+                        <skia:SKLottieView
+                            Source="CloudsPassing.json"
+                            RepeatCount="-1"
+                            RepeatMode="Restart"
+                            HeightRequest="170"
+                            WidthRequest="170"/>
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:BookingModel">
+                        <Border 
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 5"
+                            Stroke="Black"
+                            Background="White"
+                            Padding="20"
+                            Margin="0,0,0,10">
+                            <Grid 
+                            ColumnDefinitions="auto,*, auto"
+                            ColumnSpacing="10">
+                                <VerticalStackLayout 
+                                Grid.Column="1" 
+                                Spacing="2">
+                                    <HorizontalStackLayout>
+                                        <Image
+                                        Source="bedroom.png"
+                                        Margin="0,0,5,0"/>
+                                        <Label 
+                                        Text="{Binding RoomType, StringFormat='{0}, Havenly Hotel'}"
+                                        TextColor="black"
+                                        FontAttributes="Bold"
+                                        FontSize="18"/>
+                                    </HorizontalStackLayout>
+                                    <Label 
+                                    Text="{Binding RoomNumber, StringFormat='Room {0}'}"
+                                    TextColor="dimgrey" 
+                                    Margin="0,3"/>
+                                    <Label 
+                                    Text="{Binding StartDate, StringFormat='Check in: {0}'}"
+                                    TextColor="dimgrey"/>
+                                    <Label 
+                                    Text="{Binding EndDate, StringFormat='Check out: {0}'}"
+                                    TextColor="dimgrey"/>
+                                    <Border 
+                                    Stroke="LightGray" 
+                                    StrokeThickness="2"
+                                    Margin="0,10"/>
+                                    <HorizontalStackLayout>
+                                        <Label
+                                        Text="Status: "/>
+                                        <Label
+                                        TextColor="Green"
+                                        Text="confirmed"/>
+                                        <Label
+                                        Text="Sione Yerkovich"
+                                        Margin="95,0,0,0"/>
+                                    </HorizontalStackLayout>
+                                    <Button
+                                    Text="Cancel reservation"
+                                    BackgroundColor="Black"
+                                    Margin="0,20,0,0"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <!-- ^ End of bookings section ^ -->
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

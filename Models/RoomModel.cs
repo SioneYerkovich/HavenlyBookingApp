@@ -10,10 +10,11 @@ namespace HavenlyBookingApp.Models
     public class RoomModel
     {
         [PrimaryKey, AutoIncrement]
-        public int roomID { get; set; }
-        public string roomType { get; set; }
-        public int bedCount { get; set; }
-        public int price { get; set; }
-        public string availabilityStatus { get; set; }
+        public int RoomID { get; set; }
+        public string RoomType { get; set; }
+        public int RoomNumber { get; set; }
+        public int Capacity { get; set; }
+        public double Price { get; set; }
+        public bool IsAvailable { get; set; } = true;
     }
 }

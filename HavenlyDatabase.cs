@@ -79,7 +79,7 @@ namespace HavenlyBookingApp
         public async Task<int> SaveRoomAsync(RoomModel item)
         {
             await Init();
-            if (item.roomID != 0)
+            if (item.RoomID != 0)
                 return await database.UpdateAsync(item);
             else
                 return await database.InsertAsync(item);
@@ -110,7 +110,7 @@ namespace HavenlyBookingApp
         public async Task<int> SaveBookingAsync(BookingModel item)
         {
             await Init();
-            if (item.bookingID != 0)
+            if (item.BookingID != 0)
                 return await database.UpdateAsync(item);
             else
                 return await database.InsertAsync(item);
