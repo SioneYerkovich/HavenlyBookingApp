@@ -34,21 +34,21 @@ namespace HavenlyBookingApp
         public async Task<UserModel> GetUserLoginAsync(string email, string password)
         {
             await Init();
-            return await database.Table<UserModel>().Where(user => user.email == email && user.password == password).FirstOrDefaultAsync();
+            return await database.Table<UserModel>().Where(user => user.Email == email && user.Password == password).FirstOrDefaultAsync();
         }
 
         //Method to retrieve a user from the database (primarily for validation)
         public async Task<UserModel> GetUserAsync(string email)
         {
             await Init();
-            return await database.Table<UserModel>().Where(user => user.email == email).FirstOrDefaultAsync();
+            return await database.Table<UserModel>().Where(user => user.Email == email).FirstOrDefaultAsync();
         }
 
         //Method to save a user in the database, must pass a UserModel object to function correctly
         public async Task<int> SaveUserAsync(UserModel item)
         {
             await Init();
-            if (item.userID != 0)
+            if (item.UserID != 0)
                 return await database.UpdateAsync(item);
             else
                 return await database.InsertAsync(item);

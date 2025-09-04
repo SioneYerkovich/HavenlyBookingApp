@@ -103,7 +103,7 @@ namespace HavenlyBookingApp.Models.ViewModels
             var allUsers = await _database.GetUsersAsync();
             foreach (var user in allUsers)
             {
-                Console.WriteLine($"Id: {user.userID}, Email: {user.email}, Name: {user.fName} {user.lName}");
+                Console.WriteLine($"Id: {user.UserID}, Email: {user.Email}, Name: {user.FName} {user.LName}");
             }
         }
 }

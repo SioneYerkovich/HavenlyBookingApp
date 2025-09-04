@@ -11,7 +11,7 @@ namespace HavenlyBookingApp
             _session = session;
             Clouds.IsAnimationEnabled = false;
 
-            if (_session.CurrentUser.accountType != "Admin")
+            if (_session.CurrentUser.AccountType != "Admin")
             {
                 AdminItem.FlyoutItemIsVisible = false;
             }

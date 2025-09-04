@@ -137,11 +137,11 @@ namespace HavenlyBookingApp.Models.ViewModels
                 //Create a new usermodel and store in the DB
                 await _database.SaveUserAsync(new UserModel
                 {
-                    fName = formattedFirstName,
-                    lName = formattedLastName,
-                    email = formattedEmail,
-                    password = NewPassword,
-                    accountType = "User"
+                    FName = formattedFirstName,
+                    LName = formattedLastName,
+                    Email = formattedEmail,
+                    Password = NewPassword,
+                    AccountType = "User"
                 });
 
                 await Toast.Make("Account created successfully!").Show(); //Success confirmation

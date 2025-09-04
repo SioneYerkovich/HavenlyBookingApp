@@ -12,11 +12,11 @@ namespace HavenlyBookingApp.Models
     public class UserModel
     {
         [PrimaryKey, AutoIncrement]
-        public int userID { get; set; }
-        public string fName { get; set; }
-        public string lName { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
-        public string accountType { get; set; }
+        public int UserID { get; set; }
+        public string FName { get; set; }
+        public string LName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string AccountType { get; set; }
     }
 }

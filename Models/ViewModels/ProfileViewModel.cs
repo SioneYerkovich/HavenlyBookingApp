@@ -23,10 +23,10 @@ namespace HavenlyBookingApp.Models.ViewModels
         }
 
         //Creating variables that will just be used for the logic in this script
-        public string FirstName => _session.CurrentUser.fName;
-        public string LastName => _session.CurrentUser.lName;
-        public string Email => _session.CurrentUser.email;
-        public string Password => _session.CurrentUser.password;
+        public string FirstName => _session.CurrentUser.FName;
+        public string LastName => _session.CurrentUser.LName;
+        public string Email => _session.CurrentUser.Email;
+        public string Password => _session.CurrentUser.Password;
         public string CurrentDate => DateTime.Now.ToString("dddd, dd MMMM yyyy");
         private readonly UserSession _session;
         private readonly HavenlyDatabase _database;
@@ -73,7 +73,7 @@ namespace HavenlyBookingApp.Models.ViewModels
         {
             //validate the name
             var formattedName = Capitalize(newName); //Format the name
-            _session.CurrentUser.fName = formattedName; //Update the session instance first
+            _session.CurrentUser.FName = formattedName; //Update the session instance first
             await _database.UpdateUserAsync(_session.CurrentUser); //use the session instance to update in the database
             OnPropertyChanged(nameof(FirstName)); //Call the real-time tracker for live updates on UI
         }
@@ -82,7 +82,7 @@ namespace HavenlyBookingApp.Models.ViewModels
         public async Task UpdateLastNameAsync(string newName)
         {
             var formattedName = Capitalize(newName);
-            _session.CurrentUser.lName = formattedName;
+            _session.CurrentUser.LName = formattedName;
             await _database.UpdateUserAsync(_session.CurrentUser);
             OnPropertyChanged(nameof(LastName));
         }
@@ -91,7 +91,7 @@ namespace HavenlyBookingApp.Models.ViewModels
         public async Task UpdateEmailAsync(string newEmail)
         {
             var formattedEmail = newEmail.ToLower();
-            _session.CurrentUser.email = formattedEmail;
+            _session.CurrentUser.Email = formattedEmail;
             await _database.UpdateUserAsync(_session.CurrentUser);
             OnPropertyChanged(nameof(Email));
         }
@@ -99,7 +99,7 @@ namespace HavenlyBookingApp.Models.ViewModels
         //Method to update the user password in the database
         public async Task UpdatePasswordAsync(string newPassword)
         {
-            _session.CurrentUser.password = newPassword;
+            _session.CurrentUser.Password = newPassword;
             await _database.UpdateUserAsync(_session.CurrentUser);
         }
 

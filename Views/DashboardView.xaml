@@ -8,49 +8,60 @@
              x:DataType="vm:DashboardViewModel"
              BackgroundColor="#EDE7F6">
     <ScrollView>
-        <VerticalStackLayout
-            Margin="20,10,20,0">
+        <VerticalStackLayout>
 
             <!-- Header section -->
+            <Grid>
                 <skia:SKLottieView
-                    Source="welcome.json"
+                    Source="Morning2Night.json"
                     RepeatCount="0"
-                    HeightRequest="50"
-                    WidthRequest="200"
-                    Margin="0,20,0,0"
+                    RepeatMode="Restart"
+                    HeightRequest="250"
+                    WidthRequest="400"
+                    Margin="0,60,0,0"
                     HorizontalOptions="Center"/>
-                <Label
-                Text="Manage your hotel bookings easily with Havenly."
-                    HorizontalOptions="Center"
-                Margin="0,0,0,20"/>
-            <!-- ^ End of header section ^ -->
-
-            <!-- Bookings section -->
-            <Label 
-                Text="Your Bookings"
+                <skia:SKLottieView
+                    x:Name="Clouds"
+                    Source="CloudsPassing.json"
+                    RepeatCount="-1"
+                    RepeatMode="Reverse"
+                    HeightRequest="70"
+                    WidthRequest="410"
+                    Margin="0,-160,0,0"/>
+                <skia:SKLottieView
+                    x:Name="Clouds1"
+                    Source="CloudsPassing.json"
+                    RepeatCount="-1"
+                    RepeatMode="Restart"
+                    HeightRequest="70"
+                    WidthRequest="410"
+                    Margin="0,-90,0,0"/>
+            </Grid>
+            <Label
+                Text="Calm stays, happy days"
+                HorizontalOptions="Center"
+                FontSize="22"
+                Margin="0,60,0,0"/>
+            <Label
+                Text="Your haven awaits." 
+                HorizontalOptions="Center"
                 FontSize="25"
                 FontAttributes="Bold"
-                Margin="0,40,0,10"/>
+                Margin="0,0,0,0"/>
+
+                <!-- ^ End of header section ^ -->
+
+            <!-- Bookings section -->
             <CollectionView
-                ItemsSource="{Binding BookingItems}">
+                ItemsSource="{Binding BookingItems}"
+                MinimumHeightRequest="400">
                 <CollectionView.EmptyView>
                     <VerticalStackLayout>
-                        <Label 
-                            Text="Looking for your next safe haven?"
-                            HorizontalOptions="Center"
-                            Margin="0,30,0,40"/>
-                        <skia:SKLottieView
-                            Source="CloudsPassing.json"
-                            RepeatCount="-1"
-                            RepeatMode="Restart"
-                            HeightRequest="170"
-                            WidthRequest="170"/>
-                        <skia:SKLottieView
-                            Source="CloudsPassing.json"
-                            RepeatCount="-1"
-                            RepeatMode="Restart"
-                            HeightRequest="170"
-                            WidthRequest="170"/>
+                        <Button
+                            ImageSource="nights_stay.png"
+                            Text="Find your next haven"
+                            BackgroundColor="Black"
+                            Margin="20,50,20,0"/>
                     </VerticalStackLayout>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
@@ -63,49 +74,50 @@
                             Padding="20"
                             Margin="0,0,0,10">
                             <Grid 
-                            ColumnDefinitions="auto,*, auto"
-                            ColumnSpacing="10">
+                                ColumnDefinitions="auto,*, auto"
+                                ColumnSpacing="10">
                                 <VerticalStackLayout 
-                                Grid.Column="1" 
-                                Spacing="2">
+                                    Grid.Column="1" 
+                                    Spacing="2">
                                     <HorizontalStackLayout>
                                         <Image
-                                        Source="bedroom.png"
-                                        Margin="0,0,5,0"/>
+                                            Source="bedroom.png"
+                                            Margin="0,0,5,0"/>
                                         <Label 
-                                        Text="{Binding RoomType, StringFormat='{0}, Havenly Hotel'}"
-                                        TextColor="black"
-                                        FontAttributes="Bold"
-                                        FontSize="18"/>
+                                            Text="{Binding RoomType, StringFormat='{0}, Havenly Hotel'}"
+                                            TextColor="black"
+                                            FontAttributes="Bold"
+                                            FontSize="18"/>
                                     </HorizontalStackLayout>
                                     <Label 
-                                    Text="{Binding RoomNumber, StringFormat='Room {0}'}"
-                                    TextColor="dimgrey" 
-                                    Margin="0,3"/>
+                                        Text="{Binding RoomNumber, StringFormat='Room {0}'}"
+                                        TextColor="dimgrey" 
+                                        Margin="0,3"/>
                                     <Label 
-                                    Text="{Binding StartDate, StringFormat='Check in: {0}'}"
-                                    TextColor="dimgrey"/>
+                                        Text="{Binding StartDate, StringFormat='Check in: {0}'}"
+                                        TextColor="dimgrey"/>
                                     <Label 
-                                    Text="{Binding EndDate, StringFormat='Check out: {0}'}"
-                                    TextColor="dimgrey"/>
+                                        Text="{Binding EndDate, StringFormat='Check out: {0}'}"
+                                        TextColor="dimgrey"/>
                                     <Border 
-                                    Stroke="LightGray" 
-                                    StrokeThickness="2"
-                                    Margin="0,10"/>
+                                        Stroke="LightGray" 
+                                        StrokeThickness="2"
+                                        Margin="0,10"/>
                                     <HorizontalStackLayout>
                                         <Label
-                                        Text="Status: "/>
+                                            Text="Status: "/>
                                         <Label
-                                        TextColor="Green"
-                                        Text="confirmed"/>
+                                            TextColor="Green"
+                                            Text="confirmed"/>
                                         <Label
-                                        Text="Sione Yerkovich"
-                                        Margin="95,0,0,0"/>
+                                            Text="Sione Yerkovich"
+                                            Margin="95,0,0,0"/>
                                     </HorizontalStackLayout>
                                     <Button
-                                    Text="Cancel reservation"
-                                    BackgroundColor="Black"
-                                    Margin="0,20,0,0"/>
+                                        Text="Cancel reservation"
+                                        BackgroundColor="Black"
+                                        Margin="0,20,0,0"
+                                        Clicked="Cancel_Booking"/>
                                 </VerticalStackLayout>
                             </Grid>
                         </Border>
