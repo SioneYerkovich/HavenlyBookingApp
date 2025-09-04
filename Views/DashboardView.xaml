@@ -47,7 +47,7 @@
                 HorizontalOptions="Center"
                 FontSize="25"
                 FontAttributes="Bold"
-                Margin="0,0,0,0"/>
+                Margin="0,0,0,20"/>
 
                 <!-- ^ End of header section ^ -->
 
@@ -61,7 +61,7 @@
                             ImageSource="nights_stay.png"
                             Text="Find your next haven"
                             BackgroundColor="Black"
-                            Margin="20,50,20,0"/>
+                            Margin="0,50,20,0"/>
                     </VerticalStackLayout>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
@@ -72,7 +72,7 @@
                             Stroke="Black"
                             Background="White"
                             Padding="20"
-                            Margin="0,0,0,10">
+                            Margin="20,10,20,10">
                             <Grid 
                                 ColumnDefinitions="auto,*, auto"
                                 ColumnSpacing="10">
@@ -103,16 +103,22 @@
                                         Stroke="LightGray" 
                                         StrokeThickness="2"
                                         Margin="0,10"/>
-                                    <HorizontalStackLayout>
+                                    <Grid
+                                        ColumnDefinitions="auto,*">
+                                        <HorizontalStackLayout
+                                            Grid.Column="0">
+                                            <Label
+                                                Text="Status: "/>
+                                            <Label
+                                                TextColor="Green"
+                                                Text="confirmed"/>
+                                        </HorizontalStackLayout>
                                         <Label
-                                            Text="Status: "/>
-                                        <Label
-                                            TextColor="Green"
-                                            Text="confirmed"/>
-                                        <Label
-                                            Text="Sione Yerkovich"
-                                            Margin="95,0,0,0"/>
-                                    </HorizontalStackLayout>
+                                            Text="{Binding UserFullName}"
+                                            Grid.Column="1"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Center"/>
+                                    </Grid>
                                     <Button
                                         Text="Cancel reservation"
                                         BackgroundColor="Black"

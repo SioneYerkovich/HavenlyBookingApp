@@ -13,9 +13,16 @@ namespace HavenlyBookingApp.Models
         public int BookingID { get; set; }
         public int UserID { get; set; }
         public int RoomID { get; set; }
-        public int RoomNumber { get; set; } //THIS IS FOR TESTING, WILL BE REMOVED ONCE BOOKING FEATURE IS COMPLETE
-        public string RoomType { get; set; } //THIS IS FOR TESTING, WILL BE REMOVED ONCE BOOKING FEATURE IS COMPLETE
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+
+        [Ignore]
+        public string RoomNumber { get; set; } //THIS IS FOR TESTING, WILL BE REMOVED ONCE BOOKING FEATURE IS COMPLETE
+
+        [Ignore]
+        public string RoomType { get; set; } //THIS IS FOR TESTING, WILL BE REMOVED ONCE BOOKING FEATURE IS COMPLETE
+
+        [Ignore]
+        public string UserFullName { get; set; } //THIS IS FOR TESTING, WILL BE REMOVED ONCE BOOKING FEATURE IS COMPLETE
     }
 }

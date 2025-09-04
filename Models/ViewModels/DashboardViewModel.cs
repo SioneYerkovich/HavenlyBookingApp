@@ -22,7 +22,7 @@ namespace HavenlyBookingApp.Models.ViewModels
             _ = CheckBookingsInDatabaseAsync();
         }
 
-        //Creating variables that will just be used for the logic in this script
+        //Creating variables that will only be used for the logic in this script
         public string FirstName => _session.CurrentUser.FName;
         public string LastName => _session.CurrentUser.LName;
         public string Password => _session.CurrentUser.Password;
@@ -54,9 +54,9 @@ namespace HavenlyBookingApp.Models.ViewModels
             //Hardcoded rooms just for testing dashboard logic
             Rooms = new ObservableCollection<RoomModel>
            {
-                new RoomModel { RoomNumber = 101, RoomType = "Studio", Capacity = 1, Price = 150.00, IsAvailable = true },
-                new RoomModel { RoomNumber = 102, RoomType = "Suite", Capacity = 2, Price = 200.00, IsAvailable = true },
-                new RoomModel { RoomNumber = 103, RoomType = "Deluxe Suite", Capacity = 4, Price = 250.00, IsAvailable = true }
+                new RoomModel { RoomNumber = "101", RoomType = "Studio", Capacity = 1, Price = 150.00, IsAvailable = true },
+                new RoomModel { RoomNumber = "102", RoomType = "Suite", Capacity = 2, Price = 200.00, IsAvailable = true },
+                new RoomModel { RoomNumber = "103", RoomType = "Deluxe Suite", Capacity = 4, Price = 250.00, IsAvailable = true }
            };
 
             foreach (var room in Rooms)
@@ -77,8 +77,8 @@ namespace HavenlyBookingApp.Models.ViewModels
             //Hardcoded bookings just for testing dashboard logic
             BookingItems = new ObservableCollection<BookingModel>
             {
-                new BookingModel { UserID = _session.CurrentUser.UserID ,RoomID = 1, RoomNumber = 101, RoomType = "Suite", StartDate = "01-09-2025", EndDate = "05-09-2025" },
-                new BookingModel { UserID = _session.CurrentUser.UserID ,RoomID = 2, RoomNumber = 102, RoomType = "Studio", StartDate = "10-10-2025", EndDate = "12-10-2025" }
+                new BookingModel { UserID = _session.CurrentUser.UserID ,RoomID = 1, RoomNumber = "101", RoomType = "Suite", StartDate = "01-09-2025", EndDate = "05-09-2025" },
+                new BookingModel { UserID = _session.CurrentUser.UserID ,RoomID = 2, RoomNumber = "102", RoomType = "Studio", StartDate = "10-10-2025", EndDate = "12-10-2025" }
             };
 
             foreach (var booking in BookingItems)
@@ -123,14 +123,32 @@ namespace HavenlyBookingApp.Models.ViewModels
         //Method to retrieve all bookings within the database for a user
         public async Task LoadBookingsAsync()
         {
+            //Fetch database info
             var bookings = await _database.GetBookingsAsync();
+            var users = await _database.GetUsersAsync();
+            var rooms = await _database.GetRoomsAsync();
+
+            //Clear the collection for a clean slate
             BookingItems.Clear();
-            foreach (var booking in bookings)
+
+            //Re-populate the observablecollection with fresh data
+            foreach (var b in bookings)
             {
-                if (_session.CurrentUser.UserID == booking.UserID)
+                var user = users.FirstOrDefault(u => u.UserID == b.UserID); //Find the first user that has a matching UserID in bookings
+                var room = rooms.FirstOrDefault(r => r.RoomID == b.RoomID); //Find the first room that has a matching RoomID in bookings
+
+                //Add booking to the collection with extra details for UI bindings
+                BookingItems.Add(new BookingModel
                 {
-                    BookingItems.Add(booking);
-                }
+                    BookingID = b.BookingID,
+                    UserID = b.UserID,
+                    RoomID = b.RoomID,
+                    UserFullName = user.FName + " " + user.LName,
+                    RoomType = room.RoomType,
+                    RoomNumber = room.RoomNumber.ToString(),
+                    StartDate = b.StartDate,
+                    EndDate = b.EndDate
+                });
             }
         }
 
