@@ -61,7 +61,7 @@
                             ImageSource="nights_stay.png"
                             Text="Find your next haven"
                             BackgroundColor="Black"
-                            Margin="0,50,20,0"/>
+                            Margin="20,50,20,0"/>
                     </VerticalStackLayout>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>

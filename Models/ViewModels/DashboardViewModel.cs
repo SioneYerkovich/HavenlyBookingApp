@@ -109,7 +109,7 @@ namespace HavenlyBookingApp.Models.ViewModels
 
             foreach (var booking in bookings)
             {
-                Console.WriteLine($"BookingID: {booking.BookingID}, UserID: {booking.UserID}, RoomID: {booking.RoomID}, RoomNumber: {booking.RoomNumber}, RoomType: {booking.RoomType}, StartDate: {booking.StartDate}, EndDate: {booking.EndDate}");
+                Console.WriteLine($"BookingID: {booking.BookingID}, UserID: {booking.UserID}, User: {booking.UserFullName}, RoomID: {booking.RoomID}, RoomNumber: {booking.RoomNumber}, RoomType: {booking.RoomType}, StartDate: {booking.StartDate}, EndDate: {booking.EndDate}");
             }
 
             Console.WriteLine("Rooms in database:");
@@ -125,27 +125,25 @@ namespace HavenlyBookingApp.Models.ViewModels
         {
             //Fetch database info
             var bookings = await _database.GetBookingsAsync();
-            var users = await _database.GetUsersAsync();
             var rooms = await _database.GetRoomsAsync();
+            var bookingMatches = bookings.Where(b => b.UserID == _session.CurrentUser.UserID); //match booking with user
 
             //Clear the collection for a clean slate
             BookingItems.Clear();
 
             //Re-populate the observablecollection with fresh data
-            foreach (var b in bookings)
+            foreach (var b in bookingMatches)
             {
-                var user = users.FirstOrDefault(u => u.UserID == b.UserID); //Find the first user that has a matching UserID in bookings
-                var room = rooms.FirstOrDefault(r => r.RoomID == b.RoomID); //Find the first room that has a matching RoomID in bookings
-
+                var findRoom = rooms.FirstOrDefault(r => r.RoomID == b.RoomID); //Retrieve room data to use for booking data population
                 //Add booking to the collection with extra details for UI bindings
                 BookingItems.Add(new BookingModel
                 {
                     BookingID = b.BookingID,
                     UserID = b.UserID,
                     RoomID = b.RoomID,
-                    UserFullName = user.FName + " " + user.LName,
-                    RoomType = room.RoomType,
-                    RoomNumber = room.RoomNumber.ToString(),
+                    UserFullName = _session.CurrentUser.FName + " " + _session.CurrentUser.LName,
+                    RoomType = findRoom.RoomType,
+                    RoomNumber = findRoom.RoomNumber.ToString(),
                     StartDate = b.StartDate,
                     EndDate = b.EndDate
                 });
