@@ -76,6 +76,7 @@ namespace HavenlyBookingApp.Models.ViewModels
             _session.CurrentUser.FName = formattedName; //Update the session instance first
             await _database.UpdateUserAsync(_session.CurrentUser); //use the session instance to update in the database
             OnPropertyChanged(nameof(FirstName)); //Call the real-time tracker for live updates on UI
+            await UpdateRecords();
         }
 
         //Method to update the user last name in the database
@@ -85,7 +86,21 @@ namespace HavenlyBookingApp.Models.ViewModels
             _session.CurrentUser.LName = formattedName;
             await _database.UpdateUserAsync(_session.CurrentUser);
             OnPropertyChanged(nameof(LastName));
+            await UpdateRecords();
         }
+
+        //Method to update records after the namechange is performed. Keeps all data entries up to date
+        public async Task UpdateRecords()
+        {
+            var allBookings = await _database.GetBookingsAsync(); //get all bookings
+            var bookingMatches = allBookings.Where(b => b.UserID == _session.CurrentUser.UserID); //match booking with user
+            foreach (var booking in bookingMatches) //update each booking and the names stored within
+            {
+                booking.UserFullName = _session.CurrentUser.FName + " " + _session.CurrentUser.LName;
+                await _database.UpdateBookingAsync(booking);
+            }
+        }
+
 
         //Method to update the user email in the database
         public async Task UpdateEmailAsync(string newEmail)

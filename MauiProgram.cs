@@ -32,6 +32,8 @@ namespace HavenlyBookingApp
             builder.Services.AddSingleton<UserSession>();
             builder.Services.AddTransient<ProfileView>();
             builder.Services.AddTransient<ProfileViewModel>();
+            builder.Services.AddTransient<DashboardView>();
+            builder.Services.AddTransient<DashboardViewModel>();
             var app = builder.Build();
             Services = app.Services;
             return app;
